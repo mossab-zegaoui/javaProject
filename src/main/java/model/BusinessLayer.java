@@ -3,20 +3,21 @@ package model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.DataLayer;
-public class BusinessLayer implements gestionUsersInterface {
-	static ArrayList<user> liste=new ArrayList<user>();
+public class BusinessLayer implements gestionUsersInterface,gestionProduitsInterface {
+	static ArrayList<user> listeUser=new ArrayList<user>();
+	static ArrayList<produit> listeProduit=new ArrayList<produit>();
 
 
 	
 	
 	public String addUser(user u) {
 	
-		this.liste=getUsers();	
+		this.listeUser=getUsers();	
 		
-		for(int i=0;i<liste.size();i++) {
+		for(int i=0;i<listeUser.size();i++) {
 			
-			if(u.getLogin().equals(liste.get(i).getLogin())) {return "Le login est déjà utilisé";}
-			if(u.getEmail().equals(liste.get(i).getEmail())) return "Email déjà utilisé";
+			if(u.getLogin().equals(listeUser.get(i).getLogin())) {return "Le login est déjà utilisé";}
+			if(u.getEmail().equals(listeUser.get(i).getEmail())) return "Email déjà utilisé";
 		}
 		DataLayer d;
 		d = new DataLayer();
@@ -42,21 +43,29 @@ public class BusinessLayer implements gestionUsersInterface {
 
 	@Override
 	public boolean estInscris(String login, String pwd) {
-		this.liste=getUsers();
-		for(int i=0;i<liste.size();i++) {
-			if(liste.get(i).getLogin().equals(login) && liste.get(i).getPwd().equals(pwd)) return true;
+		this.listeUser=getUsers();
+		for(int i=0;i<listeUser.size();i++) {
+			if(listeUser.get(i).getLogin().equals(login) && listeUser.get(i).getPwd().equals(pwd)) return true;
 		}
 		return false;
 	}
 	public user getUser(String login) {
-		this.liste=getUsers();
-		for(int i=0;i<liste.size();i++) {
-			if(liste.get(i).getLogin().equals(login)) return liste.get(i);
+		this.listeUser=getUsers();
+		for(int i=0;i<listeUser.size();i++) {
+			if(listeUser.get(i).getLogin().equals(login)) return listeUser.get(i);
 		}
 		return null;
 		
 		
 		
+	}
+
+	@Override
+	public ArrayList<produit> getProduits() {
+		DataLayer d=new DataLayer();
+		this.listeProduit=d.getProduits();
+		
+		return listeProduit;
 	}
 
 }

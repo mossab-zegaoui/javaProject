@@ -73,7 +73,7 @@ public class DataLayer {
 			String requete="SELECT * FROM produit";
 		ResultSet rs=st.executeQuery(requete);
 		while(rs.next()) {
-			produit u=new produit(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),Integer.parseInt(rs.getString(6)));
+			produit u=new produit(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),Integer.parseInt(rs.getString(7)));
 			liste.add(u);
 		}
 		deconnecter();
@@ -108,6 +108,8 @@ public class DataLayer {
 			return liste;
 		}
 	}
+	
+
 
 
 			

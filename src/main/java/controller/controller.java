@@ -3,6 +3,7 @@ package controller;
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.BusinessLayer;
+import model.produit;
 import model.user;
 
 /**
@@ -79,6 +81,14 @@ public class controller extends HttpServlet {
 			}
 			
 			
+			
+		}
+		
+		if(request.getParameter("produit")!=null) {
+			BusinessLayer b=new BusinessLayer();
+			ArrayList<produit> listeProduits=b.getProduits();
+			request.setAttribute("listeProduits",listeProduits);
+			request.getRequestDispatcher("index.jsp").forward(request, response);	
 			
 		}
 		

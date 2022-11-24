@@ -3,7 +3,17 @@
 
 <%@ include file="WEB-INF/header.jsp" %>
 
-   
+   				
+   				<c:if test="${listeProduits==null}">
+   				<%
+   				request.getRequestDispatcher("controler?produit='getProduit'").forward(request, response);
+   				%>
+   				
+   				</c:if>
+   				
+   				<!-- ****************************DEBUT CARD******************************* -->
+   				
+   				
                 <div class="col-md-4 mt-2">
                 <div class="card">
                                     <div class="card-body">
@@ -32,24 +42,26 @@
                                            <i class="fa fa-star star"></i>
                                            <i class="fa fa-star star"></i>
                                         </div>
-
-                                        <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
+												<form action="controler" method="post">
+										<input type="text" name="panier" value="" hidden>
+                                        <button type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+												</form>
                                         
                                     </div>
+                                    
                                 </div>
 
 
                             
-                             
+                     <!-- ****************************FIN CARD******************************* -->     
            </div>                            
-  
+ 
           <!--Content-->
 
        
        </div>
        
-     
+    
        </div>
          <div class="d-flex justify-content-end text-right mt-2">
         <nav>

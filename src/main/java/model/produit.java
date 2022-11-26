@@ -2,19 +2,52 @@ package model;
 
 public class produit {
 
+	private int id;
 	private String nom;
 	private String description;
-	private String prix;
+	private String categorie;
+	private float prix;
 	private String image;
 	private int quantite;
-	
-	public produit(String nom, String description, String prix, String image,int quantite) {
-		super();
+
+	public produit(String nom, String description, String categorie, float prix, String image, int quantite) {
 		this.nom = nom;
+		this.description = description;
+		this.categorie = categorie;
+		this.prix = prix;
+		this.image = image;
+		this.quantite = quantite;
+	}
+
+	public produit(int id, String nom, String description, String categorie, float prix, String image, int quantite) {
+		super();
+		this.id=id;
+		this.nom = nom;
+		this.categorie=categorie;
 		this.description = description;
 		this.prix = prix;
 		this.image = image;
 		this.quantite=quantite;
+	}
+	
+	
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getQuantite() {
@@ -41,11 +74,11 @@ public class produit {
 		this.description = description;
 	}
 
-	public String getPrix() {
+	public float getPrix() {
 		return prix;
 	}
 
-	public void setPrix(String prix) {
+	public void setPrix(float prix) {
 		this.prix = prix;
 	}
 

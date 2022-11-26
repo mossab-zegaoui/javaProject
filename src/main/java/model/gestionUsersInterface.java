@@ -1,6 +1,4 @@
-package business;
-
-import model.user;
+package model;
 
 import java.util.ArrayList;
 

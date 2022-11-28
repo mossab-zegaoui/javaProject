@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class BusinessLayer
         implements gestionUsersInterface, gestionProduitsInterface {
-    static ArrayList<user> listeUser = new ArrayList<user>();
-    static ArrayList<produit> listeProduit = new ArrayList<produit>();
+    static ArrayList<User> listeUser = new ArrayList<User>();
+    static ArrayList<Produit> listeProduit = new ArrayList<Produit>();
     DataLayer d = new DataLayer();
 
 
-    public String addUser(user u) {
+    public String addUser(User u) {
 
         this.listeUser = getUsers();
 
@@ -36,7 +36,7 @@ public class BusinessLayer
     }
 
     @Override
-    public ArrayList<user> getUsers() {
+    public ArrayList<User> getUsers() {
         return d.getUsers();
     }
 
@@ -49,7 +49,7 @@ public class BusinessLayer
         return false;
     }
 
-    public user getUser(String login) {
+    public User getUser(String login) {
         this.listeUser = getUsers();
         for (int i = 0; i < listeUser.size(); i++) {
             if (listeUser.get(i).getLogin().equals(login)) return listeUser.get(i);
@@ -58,24 +58,37 @@ public class BusinessLayer
     }
 
     @Override
-    public ArrayList<produit> getProduits() {
-        this.listeProduit = d.getProduits();
+    public ArrayList<Produit> listAllProducts() {
+        this.listeProduit = d.listAllProducts();
         return listeProduit;
     }
 
     @Override
-    public void saveProduct(produit produit1) {
-        listeProduit = d.getProduits();
-        listeProduit.add(produit1);
-        d.saveProduct(produit1);
-    }
-
-    public void deleteProduct(int id) {
-        d.deleteProduct(id);
+    public Produit getProduct(int id) {
+        return null;
     }
 
     @Override
-    public void editProduct(produit product) {
-        d.editProduct(product);
+    public boolean saveProduct(Produit produit1) {
+        return d.saveProduct(produit1);
+    }
+
+    public boolean deleteProduct(Produit produit) {
+        return d.deleteProduct(produit);
+    }
+
+    @Override
+    public void editProduct(Produit product) {
+        d.updateProduct(product);
+    }
+
+    @Override
+    public ArrayList<Produit> getProduitsByKey(String key) {
+        return null;
+    }
+
+    @Override
+    public Produit update(Produit produit) {
+        return null;
     }
 }

@@ -1,15 +1,21 @@
 package model;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public interface gestionProduitsInterface {
 
-    public ArrayList<produit> getProduits();
+    public ArrayList<Produit> listAllProducts();
+    public Produit getProduct(int id);
 
-    public void saveProduct(produit p);
+    public boolean saveProduct(Produit produit);
 
-    public void deleteProduct(int id);
+    public boolean deleteProduct(Produit produit);
 
-    public void editProduct(produit p);
+    public void editProduct(Produit p);
+
+    public ArrayList<Produit> getProduitsByKey(String key);
+
+    public Produit update(Produit produit);
 
 }

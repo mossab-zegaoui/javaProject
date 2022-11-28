@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.BusinessLayer;
-import model.produit;
-import model.user;
+import model.Produit;
+import model.User;
 
 /**
  * Servlet implementation class controller
@@ -55,16 +55,16 @@ public class controller
             String mdp = request.getParameter("motdepasse");
             if (connecter(login, mdp)) {
                 if (login.equals("admin")) {
-                    user u = b.getUser(login);
+                    User u = b.getUser(login);
                     HttpSession session = request.getSession();
                     session.setAttribute("login", login);
                     session.setAttribute("email", u.getEmail());
                     session.setAttribute("nom", u.getNom());
-                    ArrayList<produit> listeProduits = b.getProduits();
+                    ArrayList<Produit> listeProduits = b.listAllProducts();
                     request.setAttribute("listeProduits", listeProduits);
                     request.getRequestDispatcher("admin-index.jsp").forward(request, response);
                 } else {
-                    user u = b.getUser(login);
+                    User u = b.getUser(login);
                     HttpSession session = request.getSession();
                     session.setAttribute("login", login);
                     session.setAttribute("email", u.getEmail());
@@ -78,7 +78,7 @@ public class controller
             }
         }
         if (request.getParameter("produit") != null) {
-            ArrayList<produit> listeProduits = b.getProduits();
+            ArrayList<Produit> listeProduits = b.listAllProducts();
             request.setAttribute("listeProduits", listeProduits);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -102,14 +102,15 @@ public class controller
         Float prix = Float.valueOf(request.getParameter("prix"));
         String image = request.getParameter("image");
         int quantite = Integer.parseInt(request.getParameter("quantite"));
-        produit product = new produit(nom, description, categorie, prix, image, quantite);
+        Produit product = new Produit(nom, description, categorie, prix, image, quantite);
         b.saveProduct(product);
         response.sendRedirect("admin-index.jsp");
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        b.deleteProduct(id);
+        Produit produit = new Produit(id);
+        b.deleteProduct(produit);
     }
 
 
@@ -118,7 +119,7 @@ public class controller
     }
 
     private String inscrire(String l, String m, String e, String n) {
-        user u = new user(l, m, e, n);
+        User u = new User(l, m, e, n);
         String message = b.addUser(u);
         return message;
     }

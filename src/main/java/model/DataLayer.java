@@ -41,7 +41,7 @@ public class DataLayer {
     }
 
 
-    public boolean addUser(user u) {
+    public boolean addUser(User u) {
 
         connecter();
         Statement st;
@@ -60,16 +60,16 @@ public class DataLayer {
 
     }
 
-    public ArrayList<user> getUsers() {
+    public ArrayList<User> getUsers() {
         connecter();
         Statement st;
-        ArrayList<user> liste = new ArrayList<>();
+        ArrayList<User> liste = new ArrayList<>();
         try {
             st = myCnx.createStatement();
             String requete = "SELECT * FROM user";
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                user u = new user(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                User u = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 liste.add(u);
             }
             deconnecter();
@@ -82,9 +82,9 @@ public class DataLayer {
         }
     }
 
-    public ArrayList<produit> getProduits() {
+    public ArrayList<Produit> listAllProducts() {
         connecter();
-        ArrayList<produit> liste = new ArrayList<>();
+        ArrayList<Produit> liste = new ArrayList<>();
         String requete = "SELECT * FROM produit";
         try (Statement statement = myCnx.createStatement();
              ResultSet resultSet = statement.executeQuery(requete)) {
@@ -96,7 +96,7 @@ public class DataLayer {
                 float prix = resultSet.getFloat(5);
                 String image = resultSet.getString(6);
                 int quantite = resultSet.getInt(7);
-                liste.add(new produit(id, nom, description, categorie, prix, image, quantite));
+                liste.add(new Produit(id, nom, description, categorie, prix, image, quantite));
                 System.out.println("get produits from data layer");
             }
             deconnecter();
@@ -108,35 +108,39 @@ public class DataLayer {
         }
     }
 
-    public void saveProduct(produit produit1) {
+    public Boolean saveProduct(Produit produit1) {
         connecter();
-        try (PreparedStatement preparedStatement =
+        boolean rowInserted;
+        try (PreparedStatement preparedStatement1 =
                      myCnx.prepareStatement("INSERT INTO produit (nom, description, categorie, prix, image, quantite) VALUES (?, ?, ?, ?, ?, ?)")) {
-            preparedStatement.setString(1, produit1.getNom());
-            preparedStatement.setString(2, produit1.getDescription());
-            preparedStatement.setString(3, produit1.getCategorie());
-            preparedStatement.setFloat(4, produit1.getPrix());
-            preparedStatement.setString(5, produit1.getImage());
-            preparedStatement.setInt(6, produit1.getQuantite());
-            preparedStatement.executeUpdate();
+            preparedStatement1.setString(1, produit1.getNom());
+            preparedStatement1.setString(2, produit1.getDescription());
+            preparedStatement1.setString(3, produit1.getCategorie());
+            preparedStatement1.setFloat(4, produit1.getPrix());
+            preparedStatement1.setString(5, produit1.getImage());
+            preparedStatement1.setInt(6, produit1.getQuantite());
+            rowInserted = preparedStatement1.executeUpdate() > 0;
             deconnecter();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return rowInserted;
     }
 
-    public void deleteProduct(int id) {
+    public boolean deleteProduct(Produit produit) {
         connecter();
+        boolean rowDeleted;
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("DELETE FROM produit where id = ?")) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(1, produit.getId());
+            rowDeleted = preparedStatement.executeUpdate() > 0;
             deconnecter();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return rowDeleted;
     }
 
-    public void editProduct(produit product) {
+    public void updateProduct(Produit product) {
         connecter();
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("UPDATE produit SET nom = ?, description = ?, categorie = ?, prix = ?," +
                 "prix = ?, image = ?, quantite = ?  WHERE  id = ?")) {
@@ -153,5 +157,27 @@ public class DataLayer {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Produit getProduct(int id) {
+        connecter();
+        Produit product = null;
+        try (PreparedStatement preparedStatement = myCnx.prepareStatement("SELECT  * FROM prduit where id = ?")) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String nom = resultSet.getString("nom");
+                String description = resultSet.getString("description");
+                String categorie = resultSet.getString("categorie");
+                Float prix = Float.valueOf(resultSet.getFloat("prix"));
+                String image = resultSet.getString("image");
+                int quantite = resultSet.getInt("quantite");
+                 product = new Produit(id, nom, description, categorie, prix, image, quantite);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        deconnecter();
+        return product;
     }
 }

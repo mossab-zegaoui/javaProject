@@ -34,6 +34,10 @@ public class Produit {
         this.id = id;
     }
 
+    public Produit() {
+
+    }
+
     public String getCategorie() {
         return categorie;
     }

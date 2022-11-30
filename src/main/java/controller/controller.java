@@ -109,8 +109,7 @@ public class controller
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Produit produit = new Produit(id);
-        b.deleteProduct(produit);
+        b.deleteProduct(id);
     }
 
 

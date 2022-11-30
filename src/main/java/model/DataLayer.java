@@ -127,11 +127,11 @@ public class DataLayer {
         return rowInserted;
     }
 
-    public boolean deleteProduct(Produit produit) {
+    public boolean deleteProduct(int id) {
         connecter();
         boolean rowDeleted;
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("DELETE FROM produit where id = ?")) {
-            preparedStatement.setInt(1, produit.getId());
+            preparedStatement.setInt(1, id);
             rowDeleted = preparedStatement.executeUpdate() > 0;
             deconnecter();
         } catch (SQLException e) {
@@ -142,16 +142,16 @@ public class DataLayer {
 
     public void updateProduct(Produit product) {
         connecter();
-        try (PreparedStatement preparedStatement = myCnx.prepareStatement("UPDATE produit SET nom = ?, description = ?, categorie = ?, prix = ?," +
-                "prix = ?, image = ?, quantite = ?  WHERE  id = ?")) {
+        try (PreparedStatement preparedStatement = myCnx.prepareStatement("UPDATE produit SET nom = ?, description = ?, categorie = ?," +
+                " prix = ?, image = ?, quantite = ?  WHERE  id = ?")) {
 
             preparedStatement.setString(1, product.getNom());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setString(3, product.getCategorie());
             preparedStatement.setFloat(4, product.getPrix());
             preparedStatement.setString(5, product.getImage());
-            preparedStatement.setInt(5, product.getQuantite());
-            preparedStatement.setInt(6, product.getId());
+            preparedStatement.setInt(6, product.getQuantite());
+            preparedStatement.setInt(7, product.getId());
             preparedStatement.executeUpdate();
             deconnecter();
         } catch (SQLException e) {
@@ -159,10 +159,10 @@ public class DataLayer {
         }
     }
 
-    public Produit getProduct(int id) {
+    public Produit selectProduct(int id) {
         connecter();
         Produit product = null;
-        try (PreparedStatement preparedStatement = myCnx.prepareStatement("SELECT  * FROM prduit where id = ?")) {
+        try (PreparedStatement preparedStatement = myCnx.prepareStatement("SELECT  * FROM produit where id = ?")) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -172,12 +172,35 @@ public class DataLayer {
                 Float prix = Float.valueOf(resultSet.getFloat("prix"));
                 String image = resultSet.getString("image");
                 int quantite = resultSet.getInt("quantite");
-                 product = new Produit(id, nom, description, categorie, prix, image, quantite);
+                product = new Produit(id, nom, description, categorie, prix, image, quantite);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         deconnecter();
         return product;
+    }
+
+    public ArrayList<Produit> searchProduct(String key) {
+        connecter();
+        ArrayList<Produit> products = new ArrayList<>();
+        try (PreparedStatement preparedStatementstatement = myCnx.prepareStatement("SELECT * FROM produit WHERE nom =  ?");
+             ResultSet resultSet = preparedStatementstatement.executeQuery()) {
+            preparedStatementstatement.setString(1, key);
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String nom = resultSet.getString(2);
+                String description = resultSet.getString(3);
+                String categorie = resultSet.getString(4);
+                float prix = resultSet.getFloat(5);
+                String image = resultSet.getString(6);
+                int quantite = resultSet.getInt(7);
+                products.add(new Produit(id, nom, description, categorie, prix, image, quantite));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        deconnecter();
+        return products;
     }
 }

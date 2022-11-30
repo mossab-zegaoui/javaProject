@@ -2,11 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class BusinessLayer
-        implements gestionUsersInterface, gestionProduitsInterface {
+public class BusinessLayer implements gestionUsersInterface, gestionProduitsInterface {
     static ArrayList<User> listeUser = new ArrayList<User>();
     static ArrayList<Produit> listeProduit = new ArrayList<Produit>();
-    DataLayer d = new DataLayer();
+    DataLayer dataLayer = new DataLayer();
 
 
     public String addUser(User u) {
@@ -26,18 +25,16 @@ public class BusinessLayer
             return "Vous étes bien inscrit";
 
         } else {
-            return "Erreur d'inscription";
+            return "Erreur dataLayer'inscription";
         }
     }
 
     public BusinessLayer() {
-
-
     }
 
     @Override
     public ArrayList<User> getUsers() {
-        return d.getUsers();
+        return dataLayer.getUsers();
     }
 
     @Override
@@ -59,36 +56,32 @@ public class BusinessLayer
 
     @Override
     public ArrayList<Produit> listAllProducts() {
-        this.listeProduit = d.listAllProducts();
+        this.listeProduit = dataLayer.listAllProducts();
         return listeProduit;
     }
 
     @Override
-    public Produit getProduct(int id) {
-        return null;
+    public Produit selectProduct(int id) {
+        return dataLayer.selectProduct(id);
     }
 
     @Override
     public boolean saveProduct(Produit produit1) {
-        return d.saveProduct(produit1);
+        return dataLayer.saveProduct(produit1);
     }
 
-    public boolean deleteProduct(Produit produit) {
-        return d.deleteProduct(produit);
+    public boolean deleteProduct(int id) {
+        return dataLayer.deleteProduct(id);
     }
 
     @Override
     public void editProduct(Produit product) {
-        d.updateProduct(product);
+        dataLayer.updateProduct(product);
     }
 
     @Override
-    public ArrayList<Produit> getProduitsByKey(String key) {
-        return null;
+    public ArrayList<Produit> searchProduct(String key) {
+        return dataLayer.searchProduct(key);
     }
 
-    @Override
-    public Produit update(Produit produit) {
-        return null;
-    }
 }

@@ -5,8 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import businessLayer.BusinessLayer;
 import model.Commande;
-import model.Produit;
-import model.User;
+import model.produit;
+import model.user;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 @WebServlet(name = "AdminController", value = "/AdminController")
 public class AdminController extends HttpServlet {
     BusinessLayer businessLayer;
-    ArrayList<Produit> productsList;
-    ArrayList<User> usersList;
+    ArrayList<produit> productsList;
+    ArrayList<user> usersList;
     ArrayList<Commande> achatsList;
 
     @Override
@@ -95,7 +95,7 @@ public class AdminController extends HttpServlet {
         String nom = request.getParameter("nom");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        User user = new User(login, password, email, nom);
+        user user = new user(login, password, email, nom);
         businessLayer.editUser(user);
         usersList = businessLayer.listAllUsers();
         request.setAttribute("usersList", usersList);
@@ -105,7 +105,7 @@ public class AdminController extends HttpServlet {
 
     private void showEditFormUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
-        User existingUser = businessLayer.selectUser(login);
+        user existingUser = businessLayer.selectUser(login);
         request.setAttribute("user", existingUser);
         request.getRequestDispatcher("userForm.jsp").forward(request, response);
     }
@@ -124,7 +124,7 @@ public class AdminController extends HttpServlet {
         String nom = request.getParameter("nom");
         String pasword = request.getParameter("password");
         String email = request.getParameter("email");
-        User user = new User(login, pasword, email, nom);
+        user user = new user(login, pasword, email, nom);
         businessLayer.saveUser(user);
         usersList = businessLayer.listAllUsers();
         request.setAttribute("usersList", usersList);
@@ -152,7 +152,7 @@ public class AdminController extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Produit existingProduct = businessLayer.selectProduct(id);
+        produit existingProduct = businessLayer.selectProduct(id);
         request.setAttribute("product", existingProduct);
         request.getRequestDispatcher("productForm.jsp").forward(request, response);
     }
@@ -166,7 +166,7 @@ public class AdminController extends HttpServlet {
 
     private void searchProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String key = request.getParameter("key");
-        ArrayList<Produit> searchList;
+        ArrayList<produit> searchList;
         searchList = businessLayer.searchProduct(key);
         request.setAttribute("searchList", searchList);
         request.getRequestDispatcher("productList.jsp").forward(request, response);
@@ -192,7 +192,7 @@ public class AdminController extends HttpServlet {
         String categorie = request.getParameter("categorie");
         Float prix = Float.valueOf(request.getParameter("prix"));
         int quantite = Integer.parseInt(request.getParameter("quantite"));
-        Produit product = new Produit(nom, description, categorie, prix, imageName, quantite);
+        produit product = new produit(nom, description, categorie, prix, imageName, quantite);
         businessLayer.saveProduct(product);
         productsList = businessLayer.listAllProducts();
         request.setAttribute("productsList", productsList);
@@ -229,7 +229,7 @@ public class AdminController extends HttpServlet {
         String categorie = request.getParameter("categorie");
         Float prix = Float.valueOf(request.getParameter("prix"));
         int quantite = Integer.parseInt(request.getParameter("quantite"));
-        Produit product = new Produit(id, nom, description, categorie, prix, imageName, quantite);
+        produit product = new produit(id, nom, description, categorie, prix, imageName, quantite);
         businessLayer.editProduct(product);
         productsList = businessLayer.listAllProducts();
         request.setAttribute("productsList", productsList);

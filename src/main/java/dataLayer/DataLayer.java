@@ -1,8 +1,8 @@
 package dataLayer;
 
 import model.Commande;
-import model.Produit;
-import model.User;
+import model.produit;
+import model.user;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class DataLayer {
     }
 
 
-    public boolean addUser(User u) {
+    public boolean addUser(user u) {
 
         connecter();
         Statement st;
@@ -60,16 +60,16 @@ public class DataLayer {
 
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<user> getUsers() {
         connecter();
         Statement st;
-        ArrayList<User> liste = new ArrayList<>();
+        ArrayList<user> liste = new ArrayList<>();
         try {
             st = myCnx.createStatement();
             String requete = "SELECT * FROM user";
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                User u = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                user u = new user(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 liste.add(u);
             }
             deconnecter();
@@ -82,9 +82,9 @@ public class DataLayer {
         }
     }
 
-    public ArrayList<Produit> listAllProducts() {
+    public ArrayList<produit> listAllProducts() {
         connecter();
-        ArrayList<Produit> liste = new ArrayList<>();
+        ArrayList<produit> liste = new ArrayList<>();
         String requete = "SELECT * FROM produit";
         try (Statement statement = myCnx.createStatement();
              ResultSet resultSet = statement.executeQuery(requete)) {
@@ -96,7 +96,7 @@ public class DataLayer {
                 float prix = resultSet.getFloat(5);
                 String image = resultSet.getString(6);
                 int quantite = resultSet.getInt(7);
-                liste.add(new Produit(id, nom, description, categorie, prix, image, quantite));
+                liste.add(new produit(id, nom, description, categorie, prix, image, quantite));
             }
             deconnecter();
             return liste;
@@ -107,7 +107,7 @@ public class DataLayer {
         }
     }
 
-    public Boolean saveProduct(Produit produit1) {
+    public Boolean saveProduct(produit produit1) {
         connecter();
         boolean rowInserted;
         try (PreparedStatement preparedStatement1 =
@@ -139,7 +139,7 @@ public class DataLayer {
         return rowDeleted;
     }
 
-    public void updateProduct(Produit product) {
+    public void updateProduct(produit product) {
         connecter();
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("UPDATE produit SET nom = ?, description = ?, categorie = ?," +
                 " prix = ?, image = ?, quantite = ?  WHERE  id = ?")) {
@@ -158,9 +158,9 @@ public class DataLayer {
         }
     }
 
-    public Produit selectProduct(int id) {
+    public produit selectProduct(int id) {
         connecter();
-        Produit product = null;
+        produit product = null;
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("SELECT  * FROM produit where id = ?")) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -171,7 +171,7 @@ public class DataLayer {
                 Float prix = Float.valueOf(resultSet.getFloat("prix"));
                 String image = resultSet.getString("image");
                 int quantite = resultSet.getInt("quantite");
-                product = new Produit(id, nom, description, categorie, prix, image, quantite);
+                product = new produit(id, nom, description, categorie, prix, image, quantite);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -180,9 +180,9 @@ public class DataLayer {
         return product;
     }
 
-    public ArrayList<Produit> searchProduct(String key) {
+    public ArrayList<produit> searchProduct(String key) {
         connecter();
-        ArrayList<Produit> products = new ArrayList<>();
+        ArrayList<produit> products = new ArrayList<>();
         try (PreparedStatement preparedStatementstatement = myCnx.prepareStatement("SELECT * FROM produit WHERE nom =  ?");
              ResultSet resultSet = preparedStatementstatement.executeQuery()) {
             preparedStatementstatement.setString(1, key);
@@ -194,7 +194,7 @@ public class DataLayer {
                 float prix = resultSet.getFloat(5);
                 String image = resultSet.getString(6);
                 int quantite = resultSet.getInt(7);
-                products.add(new Produit(id, nom, description, categorie, prix, image, quantite));
+                products.add(new produit(id, nom, description, categorie, prix, image, quantite));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -203,9 +203,9 @@ public class DataLayer {
         return products;
     }
 
-    public ArrayList<User> listAllUsers() {
+    public ArrayList<user> listAllUsers() {
         connecter();
-        ArrayList<User> liste = new ArrayList<>();
+        ArrayList<user> liste = new ArrayList<>();
         String requete = "SELECT * FROM user";
         try (Statement statement = myCnx.createStatement();
              ResultSet resultSet = statement.executeQuery(requete)) {
@@ -214,7 +214,7 @@ public class DataLayer {
                 String pwd = resultSet.getString(2);
                 String email = resultSet.getString(3);
                 String nom = resultSet.getString(4);
-                liste.add(new User(login, pwd, email, nom));
+                liste.add(new user(login, pwd, email, nom));
             }
             deconnecter();
             return liste;
@@ -225,7 +225,7 @@ public class DataLayer {
         }
     }
 
-    public boolean saveUser(User user) {
+    public boolean saveUser(user user) {
         connecter();
         boolean rowInserted;
         try (PreparedStatement preparedStatement1 =
@@ -255,7 +255,7 @@ public class DataLayer {
         return rowDeleted;
     }
 
-    public void updateUser(User user) {
+    public void updateUser(user user) {
         connecter();
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("UPDATE user SET pwd = ?, email = ?," +
                 " nom = ?  WHERE  login = ?")) {
@@ -270,9 +270,9 @@ public class DataLayer {
         }
     }
 
-    public User selectUser(String login) {
+    public user selectUser(String login) {
         connecter();
-        User user = null;
+        user user = null;
         try (PreparedStatement preparedStatement = myCnx.prepareStatement("SELECT  * FROM user where login = ?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -280,7 +280,7 @@ public class DataLayer {
                 String password = resultSet.getString("pwd");
                 String email = resultSet.getString("email");
                 String nom = resultSet.getString("nom");
-                user = new User(login, password, email, nom);
+                user = new user(login, password, email, nom);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

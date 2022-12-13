@@ -1,17 +1,17 @@
 package model;
 
-public class User {
+public class user {
 
     private String login;
     private String pwd;
     private String email;
     private String Nom;
 
-    public User(String login) {
+    public user(String login) {
         this.login = login;
     }
 
-    public User(String login, String pwd, String email, String nom) {
+    public user(String login, String pwd, String email, String nom) {
         this.login = login;
         this.pwd = pwd;
         this.email = email;

@@ -1,19 +1,19 @@
 package dataLayer;
 
-import model.User;
+import model.user;
 
 import java.util.ArrayList;
 
 public interface gestionUsersInterface {
 
-	public ArrayList<User> listAllUsers();
+	public ArrayList<user> listAllUsers();
 
 
-	public User selectUser(String login);
+	public user selectUser(String login);
 
-	public boolean saveUser(User user);
+	public boolean saveUser(user user);
 
 	public boolean deleteUser(String login);
 
-	public void editUser(User user);
+	public void editUser(user user);
 }

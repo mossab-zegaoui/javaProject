@@ -1,22 +1,22 @@
 package dataLayer;
 
-import model.Produit;
+import model.produit;
 
 import java.util.ArrayList;
 
 public interface gestionProduitsInterface {
 
-    public ArrayList<Produit> listAllProducts();
+    public ArrayList<produit> listAllProducts();
 
-    public ArrayList<Produit> searchProduct(String key);
+    public ArrayList<produit> searchProduct(String key);
 
-    public Produit selectProduct(int id);
+    public produit selectProduct(int id);
 
-    public boolean saveProduct(Produit produit);
+    public boolean saveProduct(produit produit);
 
     public boolean deleteProduct(int id);
 
-    public void editProduct(Produit p);
+    public void editProduct(produit p);
 
 
 }

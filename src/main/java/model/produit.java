@@ -1,6 +1,6 @@
 package model;
 
-public class Produit {
+public class produit {
 
     private int id;
     private String nom;
@@ -10,7 +10,7 @@ public class Produit {
     private String image;
     private int quantite;
 
-    public Produit(String nom, String description, String categorie, float prix, String image, int quantite) {
+    public produit(String nom, String description, String categorie, float prix, String image, int quantite) {
         this.nom = nom;
         this.description = description;
         this.categorie = categorie;
@@ -19,7 +19,7 @@ public class Produit {
         this.quantite = quantite;
     }
 
-    public Produit(int id, String nom, String description, String categorie, float prix, String image, int quantite) {
+    public produit(int id, String nom, String description, String categorie, float prix, String image, int quantite) {
         super();
         this.id = id;
         this.nom = nom;
@@ -30,11 +30,11 @@ public class Produit {
         this.quantite = quantite;
     }
 
-    public Produit(int id) {
+    public produit(int id) {
         this.id = id;
     }
 
-    public Produit() {
+    public produit() {
 
     }
 

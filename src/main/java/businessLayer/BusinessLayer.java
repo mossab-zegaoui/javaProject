@@ -8,8 +8,8 @@ import model.*;
 import java.util.ArrayList;
 
 public class BusinessLayer implements gestionUsersInterface, gestionProduitsInterface {
-    static ArrayList<User> listeUser = new ArrayList<User>();
-    static ArrayList<Produit> listeProduit = new ArrayList<Produit>();
+    static ArrayList<user> listeUser = new ArrayList<user>();
+    static ArrayList<produit> listeProduit = new ArrayList<produit>();
     static ArrayList<Commande> listeAchat = new ArrayList<>();
 
     DataLayer dataLayer = new DataLayer();
@@ -18,18 +18,18 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public ArrayList<Produit> listAllProducts() {
+    public ArrayList<produit> listAllProducts() {
         this.listeProduit = dataLayer.listAllProducts();
         return listeProduit;
     }
 
     @Override
-    public Produit selectProduct(int id) {
+    public produit selectProduct(int id) {
         return dataLayer.selectProduct(id);
     }
 
     @Override
-    public boolean saveProduct(Produit produit1) {
+    public boolean saveProduct(produit produit1) {
         return dataLayer.saveProduct(produit1);
     }
 
@@ -38,28 +38,28 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public void editProduct(Produit product) {
+    public void editProduct(produit product) {
         dataLayer.updateProduct(product);
     }
 
     @Override
-    public ArrayList<Produit> searchProduct(String key) {
+    public ArrayList<produit> searchProduct(String key) {
         return dataLayer.searchProduct(key);
     }
 
     @Override
-    public ArrayList<User> listAllUsers() {
+    public ArrayList<user> listAllUsers() {
         this.listeUser = dataLayer.listAllUsers();
         return listeUser;
     }
 
     @Override
-    public User selectUser(String login) {
+    public user selectUser(String login) {
         return dataLayer.selectUser(login);
     }
 
     @Override
-    public boolean saveUser(User user) {
+    public boolean saveUser(user user) {
         return dataLayer.saveUser(user);
     }
 
@@ -69,15 +69,15 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public void editUser(User user) {
+    public void editUser(user user) {
         dataLayer.updateUser(user);
     }
 
-    public User getUser(String login) {
+    public user getUser(String login) {
         return null;
     }
 
-    public String addUser(User u) {
+    public String addUser(user u) {
         return null;
     }
 

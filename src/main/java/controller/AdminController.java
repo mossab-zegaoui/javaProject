@@ -146,7 +146,7 @@ public class AdminController extends HttpServlet {
 
     //    Products
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("product-form.jsp").forward(request, response);
+        request.getRequestDispatcher("productForm.jsp").forward(request, response);
 
     }
 

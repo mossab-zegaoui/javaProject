@@ -7,6 +7,9 @@ public class User {
     private String email;
     private String Nom;
 
+    public User(String login) {
+        this.login = login;
+    }
 
     public User(String login, String pwd, String email, String nom) {
         this.login = login;

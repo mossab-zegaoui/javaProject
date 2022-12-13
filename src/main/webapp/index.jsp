@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 
 <%@ include file="WEB-INF/header.jsp" %>
 <div class="col-md-4 mt-2">
@@ -7,7 +6,10 @@
         <div class="card-body">
             <div class="card-img-actions">
 
-                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="card-img img-fluid" width="96" height="350" alt="">
+                <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png"
+                     class="card-img img-fluid" width="96" height="350" alt="">
+                <img src="img/football.jpg">
+                <img src="big_heartexercise.jpg" width="800" height="600">
 
             </div>
         </div>
@@ -28,10 +30,7 @@
                 <i class="fa fa-star star"></i>
                 <i class="fa fa-star star"></i>
             </div>
-
             <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-
-
         </div>
     </div>
 
@@ -48,13 +47,15 @@
 <div class="d-flex justify-content-end text-right mt-2">
     <nav>
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
+                    aria-hidden="true">&laquo;</span></a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">4</a></li>
             <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                    aria-hidden="true">&raquo;</span></a></li>
         </ul>
     </nav>
 </div>

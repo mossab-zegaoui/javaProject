@@ -12,34 +12,34 @@
     <meta name="keywords"
           content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
     <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/icofont.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/icofont.css">
     <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/themify.css">
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/flag-icon.css">
     <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
     <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/owlcarousel.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/rating.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/owlcarousel.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/rating.css">
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link id="color" rel="stylesheet" href="assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 </head>
 
 <body>
@@ -85,7 +85,7 @@
                     </li>
                     <li class="profile-nav onhover-dropdown p-0 me-0">
                         <div class="media profile-media"><img class="b-r-10"
-                                                              src="../assets/images/dashboard/profile.jpg" alt="">
+                                                              src="assets/images/dashboard/profile.jpg" alt="">
                             <div class="media-body"><span>Admin</span>
                                 <p class="mb-0 font-roboto"><i class="middle fa fa-angle-down"></i></p>
                             </div>
@@ -209,81 +209,93 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <c:if test="${user != null}">
-                                    <h5>Edit user</h5>
-                                </c:if>
-                                <c:if test="${user == null}">
-                                    <h3>Add new user </h3>
-                                </c:if>
+                                <h3> user info</h3>
                             </div>
                             <div class="card-body">
-                                <c:if test="${user != null}">
-                                <form action="AdminController" method="post" id="form">
-                                    <input type="hidden" name="action" value="updateUser">
-                                    </c:if>
-                                    <c:if test="${user == null}">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="insertUser">
-                                        </c:if>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Login</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" value="<c:out value='${user.login}' />"
-                                                               class="form-control"
-                                                               placeholder="Sasir votre login" name="login" >
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Password</label>
-                                                    <div class="col-sm-9">
-                                                        <input value="<c:out value='${user.pwd}' />"
-                                                               class="form-control" type="password"
-                                                               placeholder="saisir password "
-                                                               name="password">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Email</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text"
-                                                               value="<c:out value='${user.email}' />"
-                                                               class="form-control"
-                                                               placeholder="saisir email de l'utilisateur "
-                                                               name="email">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Nom</label>
-                                                    <div class="col-sm-9">
-                                                        <input value="<c:out value='${user.nom}' />"
-                                                               class="form-control" type="text"
-                                                               placeholder="saisir nom de l'utilisateur" name="nom">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer text-end">
-                                                <c:if test="${user == null}">
-                                                    <button type="submit" class="btn btn-success">add
-                                                        user
-                                                    </button>
-                                                </c:if>
-                                                <c:if test="${user != null}">
-                                                    <button type="submit" class="btn btn-primary">update
-                                                        user
-                                                    </button>
-                                                </c:if>
-                                                <a href="adminIndex.jsp" class="btn btn-light">
-                                                    Cancel
-                                                </a>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Login</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" value="<c:out value='${user.login}' />"
+                                                       class="form-control"
+                                                       placeholder="Sasir votre login" name="login" disabled>
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Password</label>
+                                            <div class="col-sm-9">
+                                                <input value="<c:out value='${user.pwd}' />"
+                                                       class="form-control" type="password"
+                                                       placeholder="saisir password "
+                                                       name="password" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input type="text"
+                                                       value="<c:out value='${user.email}' />"
+                                                       class="form-control"
+                                                       placeholder="saisir email de l'utilisateur "
+                                                       name="email" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">Nom</label>
+                                            <div class="col-sm-9">
+                                                <input value="<c:out value='${user.nom}' />"
+                                                       class="form-control" type="text"
+                                                       placeholder="saisir nom de l'utilisateur" name="nom" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3> ordered products</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive product-table">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Nom</th>
+                                            <th>Categorie</th>
+                                            <th>Prix</th>
+                                            <th style="text-align: center">Quantite</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="product" items="${productsList}">
+
+                                            <tr>
+                                                <td><img src="img/${product.image}" width="50" height="50"></td>
+                                                <td>
+                                                    <h6> ${product.nom}</h6>
+                                                </td>
+                                                <td>${product.categorie}</td>
+                                                <td class="font-success">$${product.prix} </td>
+                                                <td style="text-align: center">${product.quantite}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -301,26 +313,26 @@
 </footer>
 </div>
 </div>
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
-<script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- feather icon js-->
-<script src="../assets/js/icons/feather-icon/feather.min.js"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="assets/js/icons/feather-icon/feather.min.js"></script>
+<script src="assets/js/icons/feather-icon/feather-icon.js"></script>
 <!-- scrollbar js-->
-<script src="../assets/js/scrollbar/simplebar.js"></script>
-<script src="../assets/js/scrollbar/custom.js"></script>
-<script src="../assets/js/config.js"></script>
-<script src="../assets/js/sidebar-menu.js"></script>
-<script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets/js/rating/jquery.barrating.js"></script>
-<script src="../assets/js/rating/rating-script.js"></script>
-<script src="../assets/js/owlcarousel/owl.carousel.js"></script>
-<script src="../assets/js/ecommerce.js"></script>
-<script src="../assets/js/product-list-custom.js"></script>
-<script src="../assets/js/tooltip-init.js"></script>
+<script src="assets/js/scrollbar/simplebar.js"></script>
+<script src="assets/js/scrollbar/custom.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/sidebar-menu.js"></script>
+<script src="assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+<script src="assets/js/rating/jquery.barrating.js"></script>
+<script src="assets/js/rating/rating-script.js"></script>
+<script src="assets/js/owlcarousel/owl.carousel.js"></script>
+<script src="assets/js/ecommerce.js"></script>
+<script src="assets/js/product-list-custom.js"></script>
+<script src="assets/js/tooltip-init.js"></script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
-<script src="../assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 <!-- login js-->
 <!-- Plugin used-->
 </body>

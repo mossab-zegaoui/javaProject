@@ -91,4 +91,9 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
         this.listeAchat = dataLayer.listeAllAchats();
         return listeAchat;
     }
+
+    public ArrayList<produit> listeAchatUser(String login) {
+        this.listeProduit = dataLayer.listeAchatUser(login);
+        return listeProduit;
+    }
 }

@@ -292,7 +292,7 @@ public class DataLayer {
     public ArrayList<Commande> listeAllAchats() {
         connecter();
         ArrayList<Commande> liste = new ArrayList<Commande>();
-        String requete = "SELECT * FROM achat";
+        String requete = "SELECT * FROM achat where status = 1";
         try (Statement statement = myCnx.createStatement();
              ResultSet resultSet = statement.executeQuery(requete)) {
             while (resultSet.next()) {
@@ -301,7 +301,7 @@ public class DataLayer {
                 Date date = resultSet.getDate(3);
                 int quantite = resultSet.getInt(4);
                 System.out.println(id + "\n" + login + "\n" + date + "\n" + quantite);
-                liste.add(new Commande(id, login,date,quantite));
+                liste.add(new Commande(id, login, date, quantite));
             }
             deconnecter();
             return liste;
@@ -311,4 +311,32 @@ public class DataLayer {
             return liste;
         }
     }
+
+    public ArrayList<produit> listeAchatUser(String login) {
+        connecter();
+        ArrayList<produit> liste = new ArrayList<>();
+        try (PreparedStatement statement = myCnx.prepareStatement("SELECT produit.* FROM produit INNER JOIN achat ON produit.id = achat.id_produit and achat.login = ? and achat.status = 1")) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String nom = resultSet.getString(2);
+                String description = resultSet.getString(3);
+                String categorie = resultSet.getString(4);
+                float prix = resultSet.getFloat(5);
+                String image = resultSet.getString(6);
+                int quantite = resultSet.getInt(7);
+                System.out.println(id + "\n" + nom + "\n" + prix);
+                liste.add(new produit(id, nom, description, categorie, prix, image, quantite));
+            }
+            deconnecter();
+            return liste;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            deconnecter();
+            return liste;
+        }
+
+    }
+
 }

@@ -80,12 +80,34 @@ public class AdminController extends HttpServlet {
             case "listAchats":
                 listAchats(request, response);
                 break;
+            case "listAchatsUser":
+                listAchatsUser(request, response);
+                break;
+            case "goproductpage":
+                listProducts(request, response);
+                break;
+            case "gouserpage":
+                listUsers(request, response);
+                break;
+
         }
+    }
+
+    private void listAchatsUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String login = request.getParameter("login");
+        user existingUser = businessLayer.selectUser(login);
+        System.out.println(login);
+        productsList = businessLayer.listeAchatUser(login);
+        request.setAttribute("productsList", productsList);
+        request.setAttribute("user", existingUser);
+        request.getRequestDispatcher("userAchat.jsp").forward(request, response);
     }
 
     private void listAchats(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         achatsList = businessLayer.listeAllAchats();
+        productsList = businessLayer.listAllProducts();
         request.setAttribute("achatsList", achatsList);
+        request.setAttribute("productsList", productsList);
         request.getRequestDispatcher("achatList.jsp").forward(request, response);
 
     }
@@ -115,7 +137,7 @@ public class AdminController extends HttpServlet {
         businessLayer.deleteUser(login);
         usersList = businessLayer.listAllUsers();
         request.setAttribute("usersList", usersList);
-        request.setAttribute("deleteMessage","user has been deleted");
+        request.setAttribute("deleteMessage", "user has been deleted");
         request.getRequestDispatcher("userList.jsp").forward(request, response);
     }
 
@@ -128,12 +150,12 @@ public class AdminController extends HttpServlet {
         businessLayer.saveUser(user);
         usersList = businessLayer.listAllUsers();
         request.setAttribute("usersList", usersList);
-        request.setAttribute("successMessage","user has been added");
+        request.setAttribute("successMessage", "user has been added");
         request.getRequestDispatcher("userList.jsp").forward(request, response);
     }
 
     private void showNewFormUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("userFrom.jsp");
+        request.getRequestDispatcher("userForm.jsp").forward(request, response);
     }
 
     //          USER

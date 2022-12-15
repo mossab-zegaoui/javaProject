@@ -33,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/owlcarousel.css">
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/rating.css">
+    <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
     <!-- App css-->
@@ -43,6 +44,7 @@
 </head>
 
 <body>
+
 <!-- tap on top starts-->
 <div class="tap-top"><i data-feather="chevrons-up"></i></div>
 <!-- tap on tap ends-->
@@ -125,17 +127,15 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
             <div>
-                <div class="logo-wrapper"><a href="adminIndex.jsp"><img class="img-fluid for-light"
-                                                                        src="assets/images/logo/logo.png" alt=""><img
-                        class="img-fluid for-dark"
-                        src="assets/images/logo/logo_dark.png" alt=""></a>
-                    <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-                    <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid">
-                    </i></div>
+                <div class="logo-wrapper pb-5">
+                    <div class="toggle-sidebar">
+
+                    </div>
                 </div>
-                <div class="logo-icon-wrapper"><a href="adminIndex.jsp"><img class="img-fluid"
-                                                                             src="assets/images/logo/logo-icon.png"
-                                                                             alt=""></a></div>
+                <div class="logo-icon-wrapper"><a href="adminIndex.jsp">
+                    <img class="img-fluid"
+                         src="assets/images/logo/logo-icon.png"
+                         alt=""></a></div>
                 <nav class="sidebar-main">
                     <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                     <div id="sidebar-menu">
@@ -188,6 +188,7 @@
         </div>
         <!-- Page Sidebar Ends-->
         <div class="page-body">
+            <br>
             <div class="container-fluid">
                 <div class="page-title">
                     <div class="row">
@@ -195,135 +196,90 @@
                         </div>
                         <div class="col-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a>
+                                <li class="breadcrumb-item"><a href="adminIndex.jsp"> <i data-feather="home"></i></a>
                                 </li>
-                                <li class="breadcrumb-item active">Edit</li>
+                                <li class="breadcrumb-item">user</li>
+                                <li class="breadcrumb-item active">user list</li>
                             </ol>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
                 <div class="row">
+                    <!-- Individual column searching (text inputs) Starts-->
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header">
-                                <c:if test="${product != null}">
-                                    <h5>Edit Product</h5>
-                                </c:if>
-                                <c:if test="${product == null}">
-                                    <h5>Add new Product</h5>
-                                </c:if>
-                            </div>
+                            <c:if test="${successMessage != null}">
+                                <div class="alert alert-success mt-4" role="alert"
+                                     style="width: 30% ; margin: auto; text-align: center">
+                                        ${successMessage}
+                                </div>
+                            </c:if>
+                            <c:if test="${deleteMessage != null}">
+                                <div class="alert alert-danger mt-4" role="alert"
+                                     style="width: auto ; margin: auto; text-align: center">
+                                        ${deleteMessage}
+                                </div>
+                            </c:if>
                             <div class="card-body">
-                                <c:if test="${product != null}">
-                                <form action="AdminController" method="post" enctype="multipart/form-data" id="form">
-                                    <input type="hidden" name="action" value="updateProduct">
-                                    <input type="hidden" name="id" value="<c:out value='${product.id}' />"/>
-                                    </c:if>
-                                    <c:if test="${product == null}">
-                                    <form action="AdminController" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="action" value="insertProduct">
-                                        </c:if>
-
-                                        <c:if test="${product == null}">
-                                        Add New Product
-                                        </c:if>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Nom</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" value="<c:out value='${product.nom}' />"
-                                                               class="form-control" type="text"
-                                                               placeholder="Sasir nom du produit" name="nom">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Description</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text"
-                                                               value="<c:out value='${product.description}' />"
-                                                               class="form-control" type="text"
-                                                               placeholder="saisir description du produit "
-                                                               name="description">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Categorie</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-control" name="categorie">
-                                                            <option value="ordinateur">ordinateur</option>
-                                                            <option value="accessoireOrdinateur">accessoireOrdinateur
-                                                            </option>
-                                                            <option value="stockage"> stockage</option>
-                                                            <option value="composant pc">composant pc</option>
-                                                            <option value="tablette & telephone">tablette & telephone
-                                                            </option>
-                                                            <option value="accessoire telephone">accessoire telephone
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Prix</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="number"
-                                                               value="<c:out value='${product.prix}' />"
-                                                               class="form-control" type="text"
-                                                               placeholder="saisir prix du produit" name="prix">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Image</label>
-                                                    <br>
-                                                    <c:if test="${product != null}">
-                                                    <div class="col-sm-9">
-                                                        <img src="img/${product.image}" style="width: 150px"
-                                                             height="auto">
-                                                        </c:if>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <br>
-                                                        <input class="form-control" type="file"
-                                                               value="<c:out value= '${product.image}' />"
-                                                               aria-label="file example" required=""
-                                                               data-bs-original-title="" title="" name="image"
-                                                               style="width: 50%">
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Quantite</label>
-                                                    <div class="col-sm-9">
-                                                        <input value="<c:out value='${product.quantite}' />"
-                                                               class="form-control" type="number"
-                                                               placeholder="saisir quantite du produit"
-                                                               name="quantite">
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer text-end">
-                                                    <c:if test="${product == null}">
-                                                        <button type="submit" class="btn btn-success">add
-                                                            product
+                                <form method="post" action="AdminController">
+                                    <input type="hidden" name="action" value="newUser">
+                                    <button type="submit" class="btn btn-primary-gradien mb-3">add user</button>
+                                </form>
+                                <div class="table-responsive user-table">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                        <tr>
+                                            <th>Login</th>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Password</th>
+                                            <th>Actions</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="user" items="${usersList}">
+                                            <tr>
+                                                <td>
+                                                    <form action="AdminController" method="post">
+                                                        <input type="hidden" name="action" value="listAchatsUser">
+                                                        <input type="hidden" name="login" value="${user.login}">
+                                                            <button type="submit"
+                                                                    class="btn btn-transparent" style="color: black">${user.login}</button>
+                                                    </form>
+                                                </td>
+                                                <td>${user.nom}</td>
+                                                <td>${user.email}</td>
+                                                <td>${user.pwd}</td>
+                                                <td>
+                                                    <form action="AdminController" method="post">
+                                                        <input type="hidden" name="action" value="editUser">
+                                                        <input type="hidden" name="login" value="${user.login}">
+                                                        <button type="submit" class="btn btn-success btn-xs"
+                                                                data-original-title="btn btn-success btn-xs" title="">
+                                                            <i class="icon-pencil"></i>
                                                         </button>
-                                                    </c:if>
-                                                    <c:if test="${product != null}">
-                                                        <button type="submit" class="btn btn-primary">update
-                                                            product
-                                                        </button>
-                                                    </c:if>
-                                                    <a href="adminIndex.jsp" class="btn btn-light">
-                                                        Cancel
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="AdminController" method="post">
+                                                        <input type="hidden" name="action" value="deleteUser">
+                                                        <input type="hidden" name="login" value="${user.login}">
+                                                        <button type="submit" class="btn btn-danger"
+                                                                data-original-title="btn btn-danger btn-xs" title=""><i
+                                                                class="icon-trash"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Individual column searching (text inputs) Ends-->
                 </div>
-
             </div>
             <!-- Container-fluid Ends-->
         </div>
@@ -338,7 +294,9 @@
         </footer>
     </div>
 </div>
+<!-- latest jquery-->
 <script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- Bootstrap js-->
 <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- feather icon js-->
 <script src="assets/js/icons/feather-icon/feather.min.js"></script>
@@ -346,7 +304,9 @@
 <!-- scrollbar js-->
 <script src="assets/js/scrollbar/simplebar.js"></script>
 <script src="assets/js/scrollbar/custom.js"></script>
+<!-- Sidebar jquery-->
 <script src="assets/js/config.js"></script>
+<!-- Plugins JS start-->
 <script src="assets/js/sidebar-menu.js"></script>
 <script src="assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/js/rating/jquery.barrating.js"></script>

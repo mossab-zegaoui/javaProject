@@ -12,36 +12,35 @@
     <meta name="keywords"
           content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <title>Cuba - Premium Admin Template</title>
+    <link rel="icon" href="assets2/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets2/images/favicon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/font-awesome.css">
     <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/icofont.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/icofont.css">
     <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/themify.css">
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/flag-icon.css">
     <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/feather-icon.css">
     <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/owlcarousel.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/rating.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/owlcarousel.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/rating.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/vendors/bootstrap.css">
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="assets2/css/style.css">
+    <link id="color" rel="stylesheet" href="assets2/css/color-1.css" media="screen">
     <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets2/css/responsive.css">
 </head>
 
 <body>
@@ -70,8 +69,7 @@
                 </div>
             </form>
             <div class="header-logo-wrapper col-auto p-0">
-                <div class="logo-wrapper"><a href="adminIndex.jsp"><img class="img-fluid"
-                                                                        src="assets/images/logo/logo.png" alt=""></a>
+                <div class="logo-wrapper"><a href="adminIndex.jsp"></a>
                 </div>
                 <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle"
                                                data-feather="align-center"></i>
@@ -88,7 +86,7 @@
                     </li>
                     <li class="profile-nav onhover-dropdown p-0 me-0">
                         <div class="media profile-media"><img class="b-r-10"
-                                                              src="../assets/images/dashboard/profile.jpg" alt="">
+                                                              src="assets2/images/dashboard/profile.jpg" alt="">
                             <div class="media-body"><span>Admin</span>
                                 <p class="mb-0 font-roboto"><i class="middle fa fa-angle-down"></i></p>
                             </div>
@@ -122,7 +120,7 @@
                 </div></script>
         </div>
     </div>
-    <!-- Page Header Ends                              -->
+    <!-- Page Header Ends -->
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
@@ -189,6 +187,7 @@
         </div>
         <!-- Page Sidebar Ends-->
         <div class="page-body">
+
             <br>
             <div class="container-fluid">
                 <div class="page-title">
@@ -199,8 +198,8 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="adminIndex.jsp"> <i data-feather="home"></i></a>
                                 </li>
-                                <li class="breadcrumb-item">user</li>
-                                <li class="breadcrumb-item active">user list</li>
+                                <li class="breadcrumb-item">Product</li>
+                                <li class="breadcrumb-item active">Product list</li>
                             </ol>
                         </div>
                     </div>
@@ -209,44 +208,39 @@
                     <!-- Individual column searching (text inputs) Starts-->
                     <div class="col-sm-12">
                         <div class="card">
-                            <c:if test="${successMessage != null}">
-                                <div class="alert alert-success mt-4" role="alert"
-                                     style="width: 30% ; margin: auto; text-align: center">
-                                        ${successMessage}
-                                </div>
-                            </c:if>
-                            <c:if test="${deleteMessage != null}">
-                                <div class="alert alert-danger mt-4" role="alert"
-                                     style="width: auto ; margin: auto; text-align: center">
-                                        ${deleteMessage}
-                                </div>
-                            </c:if>
                             <div class="card-body">
-                                <a href="userForm.jsp" class="btn btn-primary mb-3" style="margin-left: 82%">Add
-                                    user</a>
-                                <div class="table-responsive user-table">
+                                <form method="post" action="AdminController">
+                                    <input type="hidden" value="newProduct" name="action">
+                                    <button type="submit" class="btn btn-primary-gradien mb-3">Add product</button>
+                                </form>
+                                <div class="table-responsive product-table">
                                     <table class="display" id="basic-1">
                                         <thead>
                                         <tr>
-                                            <th>Login</th>
+                                            <th>Image</th>
                                             <th>Nom</th>
-                                            <th>Email</th>
-                                            <th>Password</th>
+                                            <th>Categorie</th>
+                                            <th>Prix</th>
+                                            <th>Quantite</th>
                                             <th>Actions</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="user" items="${usersList}">
+                                        <c:forEach var="product" items="${productsList}">
+
                                             <tr>
-                                                <td><h6>${user.login}</h6></td>
-                                                <td>${user.nom}</td>
-                                                <td>${user.email}</td>
-                                                <td>${user.pwd}</td>
+                                                <td><img src="img/${product.image}" width="50" height="50"></td>
+                                                <td>
+                                                    <h6> ${product.nom}</h6>
+                                                </td>
+                                                <td>${product.categorie}</td>
+                                                <td class="font-success">$${product.prix} </td>
+                                                <td>${product.quantite}</td>
                                                 <td>
                                                     <form action="AdminController" method="post">
-                                                        <input type="hidden" name="action" value="editUser">
-                                                        <input type="hidden" name="login" value="${user.login}">
+                                                        <input type="hidden" name="action" value="editProduct">
+                                                        <input type="hidden" name="id" value="${product.id}">
                                                         <button type="submit" class="btn btn-success btn-xs"
                                                                 data-original-title="btn btn-success btn-xs" title="">
                                                             <i class="icon-pencil"></i>
@@ -255,8 +249,8 @@
                                                 </td>
                                                 <td>
                                                     <form action="AdminController" method="post">
-                                                        <input type="hidden" name="action" value="deleteUser">
-                                                        <input type="hidden" name="login" value="${user.login}">
+                                                        <input type="hidden" name="action" value="deleteProduct">
+                                                        <input type="hidden" name="id" value="${product.id}">
                                                         <button type="submit" class="btn btn-danger"
                                                                 data-original-title="btn btn-danger btn-xs" title=""><i
                                                                 class="icon-trash"></i></button>
@@ -287,29 +281,29 @@
     </div>
 </div>
 <!-- latest jquery-->
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
+<script src="assets2/js/jquery-3.5.1.min.js"></script>
 <!-- Bootstrap js-->
-<script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="assets2/js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- feather icon js-->
-<script src="../assets/js/icons/feather-icon/feather.min.js"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+<script src="assets2/js/icons/feather-icon/feather.min.js"></script>
+<script src="assets2/js/icons/feather-icon/feather-icon.js"></script>
 <!-- scrollbar js-->
-<script src="../assets/js/scrollbar/simplebar.js"></script>
-<script src="../assets/js/scrollbar/custom.js"></script>
+<script src="assets2/js/scrollbar/simplebar.js"></script>
+<script src="assets2/js/scrollbar/custom.js"></script>
 <!-- Sidebar jquery-->
-<script src="../assets/js/config.js"></script>
+<script src="assets2/js/config.js"></script>
 <!-- Plugins JS start-->
-<script src="../assets/js/sidebar-menu.js"></script>
-<script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets/js/rating/jquery.barrating.js"></script>
-<script src="../assets/js/rating/rating-script.js"></script>
-<script src="../assets/js/owlcarousel/owl.carousel.js"></script>
-<script src="../assets/js/ecommerce.js"></script>
-<script src="../assets/js/product-list-custom.js"></script>
-<script src="../assets/js/tooltip-init.js"></script>
+<script src="assets2/js/sidebar-menu.js"></script>
+<script src="assets2/js/datatable/datatables/jquery.dataTables.min.js"></script>
+<script src="assets2/js/rating/jquery.barrating.js"></script>
+<script src="assets2/js/rating/rating-script.js"></script>
+<script src="assets2/js/owlcarousel/owl.carousel.js"></script>
+<script src="assets2/js/ecommerce.js"></script>
+<script src="assets2/js/product-list-custom.js"></script>
+<script src="assets2/js/tooltip-init.js"></script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
-<script src="../assets/js/script.js"></script>
+<script src="assets2/js/script.js"></script>
 <!-- login js-->
 <!-- Plugin used-->
 </body>

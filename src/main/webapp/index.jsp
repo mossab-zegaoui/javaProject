@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 
-<%@ include file="WEB-INF/header.jsp" %>
+<%@ include file="header.jsp" %>
 <div class="col-md-4 mt-2">
     <div class="card">
         <div class="card-body">
@@ -9,7 +9,7 @@
                 <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png"
                      class="card-img img-fluid" width="96" height="350" alt="">
                 <img src="img/football.jpg">
-                <img src="big_heartexercise.jpg" width="800" height="600">
+                <img src="WEB-INF/big_heartexercise.jpg" width="800" height="600">
 
             </div>
         </div>
@@ -64,7 +64,7 @@
 
 
 <!--Grid row-->
-<%@ include file="WEB-INF/footer.jsp" %>
+<%@ include file="footer.jsp" %>
  
     
      

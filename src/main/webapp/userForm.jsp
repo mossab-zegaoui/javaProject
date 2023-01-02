@@ -145,38 +145,28 @@
                                                                                       aria-hidden="true"></i></div>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Product</span></a>
+                                    data-feather="shopping-bag"></i><span>Products</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listProducts">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Products</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listProducts">product list</a>
+                                    </li>
                                 </ul>
 
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
                                     data-feather="users"></i><span>Users</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listUsers">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Users</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listUsers">user list</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Achats</span></a>
+                                    data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listAchats">
-                                        <button type="submit" class="btn bg-transparent">liste achat</button>
-                                    </form>
-
+                                    <li>
+                                        <a href="AdminController?action=listAchats">order list</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -226,39 +216,52 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3 row">
+                                                    <input type="hidden" value="<c:out value='${user.id}' />"
+                                                           class="form-control"
+                                                           placeholder="************* " name="id">
                                                     <label class="col-sm-3 col-form-label">Login</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" value="<c:out value='${user.login}' />"
                                                                class="form-control"
-                                                               placeholder="Sasir votre login" name="login" >
+                                                               placeholder="************* " name="login">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Password</label>
                                                     <div class="col-sm-9">
-                                                        <input value="<c:out value='${user.pwd}' />"
+                                                        <input value="<c:out value='${user.password}' />"
                                                                class="form-control" type="password"
-                                                               placeholder="saisir password "
+                                                               placeholder="************* "
                                                                name="password">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Email</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text"
+                                                        <input type="email"
                                                                value="<c:out value='${user.email}' />"
                                                                class="form-control"
-                                                               placeholder="saisir email de l'utilisateur "
+                                                               placeholder="************* "
                                                                name="email">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Nom</label>
+                                                    <label class="col-sm-3 col-form-label">first name</label>
                                                     <div class="col-sm-9">
-                                                        <input value="<c:out value='${user.nom}' />"
+                                                        <input value="<c:out value='${user.firstName}' />"
                                                                class="form-control" type="text"
-                                                               placeholder="saisir nom de l'utilisateur" name="nom">
+                                                               placeholder="************* " name="firstName">
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">last name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text"
+                                                           value="<c:out value='${user.lastName}' />"
+                                                           class="form-control"
+                                                           placeholder="************* "
+                                                           name="lastName">
                                                 </div>
                                             </div>
                                             <div class="card-footer text-end">
@@ -272,10 +275,7 @@
                                                         user
                                                     </button>
                                                 </c:if>
-                                                <form method="post" action="AdminController">
-                                                    <input type="hidden" name="action" value="gouserpage">
-                                                    <button type="submit" class="btn btn-light">Cancel</button>
-                                                </form>
+                                                <a href="AdminController?action=listUsers">Cancel</a>
                                             </div>
                                         </div>
                                     </form>

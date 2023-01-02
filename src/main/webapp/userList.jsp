@@ -147,38 +147,28 @@
                                                                                       aria-hidden="true"></i></div>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Product</span></a>
+                                    data-feather="shopping-bag"></i><span>Products</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listProducts">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Products</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listProducts">product list</a>
+                                    </li>
                                 </ul>
 
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
                                     data-feather="users"></i><span>Users</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listUsers">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Users</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listUsers">user list</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Achats</span></a>
+                                    data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listAchats">
-                                        <button type="submit" class="btn bg-transparent">liste achat</button>
-                                    </form>
-
+                                    <li>
+                                        <a href="AdminController?action=listOrders">order list</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -208,58 +198,31 @@
                     <!-- Individual column searching (text inputs) Starts-->
                     <div class="col-sm-12">
                         <div class="card">
-                            <c:if test="${successMessage != null}">
-                                <div class="alert alert-success mt-4" role="alert"
-                                     style="width: 30% ; margin: auto; text-align: center">
-                                        ${successMessage}
-                                </div>
-                            </c:if>
-                            <c:if test="${deleteMessage != null}">
-                                <div class="alert alert-danger mt-4" role="alert"
-                                     style="width: auto ; margin: auto; text-align: center">
-                                        ${deleteMessage}
-                                </div>
-                            </c:if>
                             <div class="card-body">
-                                <form method="post" action="AdminController">
-                                    <input type="hidden" name="action" value="newUser">
-                                    <button type="submit" class="btn btn-primary-gradien mb-3">add user</button>
-                                </form>
+                                <a href="AdminController?action=newUser" class="btn btn-outline-primary mb-2"> Add
+                                    user</a>
                                 <div class="table-responsive user-table">
                                     <table class="display" id="basic-1">
                                         <thead>
                                         <tr>
                                             <th>Login</th>
-                                            <th>Nom</th>
-                                            <th>Email</th>
                                             <th>Password</th>
-                                            <th>Actions</th>
+                                            <th>Email</th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="user" items="${usersList}">
+                                        <c:forEach var="user" items="${userList}">
                                             <tr>
-                                                <td>
-                                                    <form action="AdminController" method="post">
-                                                        <input type="hidden" name="action" value="listAchatsUser">
-                                                        <input type="hidden" name="login" value="${user.login}">
-                                                            <button type="submit"
-                                                                    class="btn btn-transparent" style="color: black">${user.login}</button>
-                                                    </form>
-                                                </td>
-                                                <td>${user.nom}</td>
+                                                <td>${user.login}</td>
+                                                <td>${user.password}</td>
                                                 <td>${user.email}</td>
-                                                <td>${user.pwd}</td>
                                                 <td>
-                                                    <form action="AdminController" method="post">
-                                                        <input type="hidden" name="action" value="editUser">
-                                                        <input type="hidden" name="login" value="${user.login}">
-                                                        <button type="submit" class="btn btn-success btn-xs"
-                                                                data-original-title="btn btn-success btn-xs" title="">
-                                                            <i class="icon-pencil"></i>
-                                                        </button>
-                                                    </form>
+                                                    <a href="AdminController?action=editUser&id=${user.id}">
+                                                        <i class="icon-pencil btn btn-primary"></i>
+                                                    </a>
+
                                                 </td>
                                                 <td>
                                                     <form action="AdminController" method="post">

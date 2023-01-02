@@ -60,7 +60,7 @@ html(lang='en')
       include ../../components/footer-files
       script.        
         $(document).on('click', '#error', function(e) {
-          if($('.email').val() == '' || $('.pwd').val() == ''){
+          if($('.email').val() == '' || $('.password').val() == ''){
           swal(
             "Error!", "Sorry, looks like some data are not filled, please try again !", "error"           
           )

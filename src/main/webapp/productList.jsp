@@ -146,38 +146,28 @@
                                                                                       aria-hidden="true"></i></div>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Product</span></a>
+                                    data-feather="shopping-bag"></i><span>Products</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listProducts">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Products</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listProducts">product list</a>
+                                    </li>
                                 </ul>
 
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
                                     data-feather="users"></i><span>Users</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listUsers">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Users</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listUsers">user list</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Achats</span></a>
+                                    data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listAchats">
-                                        <button type="submit" class="btn bg-transparent">liste achat</button>
-                                    </form>
-
+                                    <li>
+                                        <a href="AdminController?action=listOrders">order list</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -209,47 +199,51 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="AdminController">
-                                    <input type="hidden" value="newProduct" name="action">
-                                    <button type="submit" class="btn btn-primary-gradien mb-3">Add product</button>
-                                </form>
+                                <a href="AdminController?action=newProduct" class="btn btn-primary-gradien mb-2">add product</a>
                                 <div class="table-responsive product-table">
                                     <table class="display" id="basic-1">
                                         <thead>
                                         <tr>
                                             <th>Image</th>
-                                            <th>Nom</th>
-                                            <th>Categorie</th>
-                                            <th>Prix</th>
-                                            <th>Quantite</th>
-                                            <th>Actions</th>
+                                            <th>Details</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Start date</th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="product" items="${productsList}">
+                                        <c:forEach var="product" items="${products}">
 
                                             <tr>
                                                 <td><img src="img/${product.image}" width="50" height="50"></td>
                                                 <td>
-                                                    <h6> ${product.nom}</h6>
+                                                    <p> ${product.description}</p>
                                                 </td>
-                                                <td>${product.categorie}</td>
-                                                <td class="font-success">$${product.prix} </td>
-                                                <td>${product.quantite}</td>
+                                                <td>$ ${product.price}</td>
                                                 <td>
-                                                    <form action="AdminController" method="post">
-                                                        <input type="hidden" name="action" value="editProduct">
-                                                        <input type="hidden" name="id" value="${product.id}">
-                                                        <button type="submit" class="btn btn-success btn-xs"
-                                                                data-original-title="btn btn-success btn-xs" title="">
-                                                            <i class="icon-pencil"></i>
-                                                        </button>
-                                                    </form>
+                                                    <c:if test="${(product.quantity > 30) }">
+                                                        <p class="font-success">In stock</p>
+                                                    </c:if>
+                                                    <c:if test="${(product.quantity <= 30)  && (product.quantity  > 20)}">
+                                                        <p class="font-primary">Low on stock</p>
+                                                    </c:if>
+                                                    <c:if test="${(product.quantity <= 20)}">
+                                                        <p class="font-danger">out of stock</p>
+                                                    </c:if>
+
+                                                </td>
+                                                <td class="col-lg-2">${product.created_at} </td>
+                                                <td>
+                                                    <a href="AdminController?action=editProduct&id=${product.id}">
+                                                        <i class="icon-pencil btn btn-primary"></i>
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <form action="AdminController" method="post">
                                                         <input type="hidden" name="action" value="deleteProduct">
+
                                                         <input type="hidden" name="id" value="${product.id}">
                                                         <button type="submit" class="btn btn-danger"
                                                                 data-original-title="btn btn-danger btn-xs" title=""><i

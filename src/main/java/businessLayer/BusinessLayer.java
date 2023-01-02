@@ -1,16 +1,14 @@
 package businessLayer;
 
 import dataLayer.DataLayer;
-import dataLayer.gestionProduitsInterface;
-import dataLayer.gestionUsersInterface;
 import model.*;
 
 import java.util.ArrayList;
 
 public class BusinessLayer implements gestionUsersInterface, gestionProduitsInterface {
-    static ArrayList<user> listeUser = new ArrayList<user>();
-    static ArrayList<produit> listeProduit = new ArrayList<produit>();
-    static ArrayList<Commande> listeAchat = new ArrayList<>();
+    static ArrayList<User> users = new ArrayList<User>();
+    static ArrayList<Product> products = new ArrayList<Product>();
+    static ArrayList<Order> listeAchat = new ArrayList<>();
 
     DataLayer dataLayer = new DataLayer();
 
@@ -18,18 +16,18 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public ArrayList<produit> listAllProducts() {
-        this.listeProduit = dataLayer.listAllProducts();
-        return listeProduit;
+    public ArrayList<Product> listAllProducts() {
+        this.products = dataLayer.listAllProducts();
+        return products;
     }
 
     @Override
-    public produit selectProduct(int id) {
+    public Product selectProduct(int id) {
         return dataLayer.selectProduct(id);
     }
 
     @Override
-    public boolean saveProduct(produit produit1) {
+    public boolean saveProduct(Product produit1) {
         return dataLayer.saveProduct(produit1);
     }
 
@@ -38,28 +36,34 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public void editProduct(produit product) {
+    public void editProduct(Product product) {
         dataLayer.updateProduct(product);
     }
 
     @Override
-    public ArrayList<produit> searchProduct(String key) {
-        return dataLayer.searchProduct(key);
+    public ArrayList<Product> getProcessingOrders() {
+        return dataLayer.getProcessingOrders();
     }
 
     @Override
-    public ArrayList<user> listAllUsers() {
-        this.listeUser = dataLayer.listAllUsers();
-        return listeUser;
+    public ArrayList<Product> shippedProducts() {
+        return dataLayer.getshippedProducts();
+    }
+
+
+    @Override
+    public ArrayList<User> listAllUsers() {
+        this.users = dataLayer.listAllUsers();
+        return users;
     }
 
     @Override
-    public user selectUser(String login) {
-        return dataLayer.selectUser(login);
+    public User selectUser(int id) {
+        return dataLayer.selectUser(id);
     }
 
     @Override
-    public boolean saveUser(user user) {
+    public boolean saveUser(User user) {
         return dataLayer.saveUser(user);
     }
 
@@ -69,15 +73,15 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
     @Override
-    public void editUser(user user) {
+    public void editUser(User user) {
         dataLayer.updateUser(user);
     }
 
-    public user getUser(String login) {
+    public User getUser(String login) {
         return null;
     }
 
-    public String addUser(user u) {
+    public String addUser(User u) {
         return null;
     }
 
@@ -86,14 +90,26 @@ public class BusinessLayer implements gestionUsersInterface, gestionProduitsInte
     }
 
 
-    public ArrayList<Commande> listeAllAchats() {
+    public ArrayList<Order> listeAllAchats() {
 
         this.listeAchat = dataLayer.listeAllAchats();
         return listeAchat;
     }
 
-    public ArrayList<produit> listeAchatUser(String login) {
-        this.listeProduit = dataLayer.listeAchatUser(login);
-        return listeProduit;
+    public ArrayList<Product> listeAchatUser(String login) {
+        this.products = dataLayer.listeAchatUser(login);
+        return products;
+    }
+
+    public boolean existLogin(User user) {
+        return dataLayer.existLogin(user);
+    }
+
+    public boolean isRegistered(User user) {
+        return dataLayer.isRegistered(user);
+    }
+
+    public boolean isAdmin(User user) {
+        return dataLayer.isAdmin(user);
     }
 }

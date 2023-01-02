@@ -147,38 +147,28 @@
                                                                                       aria-hidden="true"></i></div>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Product</span></a>
+                                    data-feather="shopping-bag"></i><span>Products</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listProducts">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Products</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listProducts">product list</a>
+                                    </li>
                                 </ul>
 
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
                                     data-feather="users"></i><span>Users</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listUsers">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Users</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listUsers">user list</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Achats</span></a>
+                                    data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listAchats">
-                                        <button type="submit" class="btn bg-transparent">liste achat</button>
-                                    </form>
-
+                                    <li>
+                                        <a href="AdminController?action=listAchats">order list</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -225,7 +215,7 @@
                                         <div class="mb-3 row">
                                             <label class="col-sm-3 col-form-label">Password</label>
                                             <div class="col-sm-9">
-                                                <input value="<c:out value='${user.pwd}' />"
+                                                <input value="<c:out value='${user.password}' />"
                                                        class="form-control" type="password"
                                                        placeholder="saisir password "
                                                        name="password" disabled>
@@ -244,9 +234,9 @@
                                         <div class="mb-3 row">
                                             <label class="col-sm-3 col-form-label">Nom</label>
                                             <div class="col-sm-9">
-                                                <input value="<c:out value='${user.nom}' />"
+                                                <input value="<c:out value='${user.name}' />"
                                                        class="form-control" type="text"
-                                                       placeholder="saisir nom de l'utilisateur" name="nom" disabled>
+                                                       placeholder="saisir name de l'utilisateur" name="name" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -280,10 +270,10 @@
                                             <tr>
                                                 <td><img src="img/${product.image}" width="50" height="50"></td>
                                                 <td>
-                                                    <h6> ${product.nom}</h6>
+                                                    <h6> ${product.name}</h6>
                                                 </td>
                                                 <td>${product.categorie}</td>
-                                                <td class="font-success">$${product.prix} </td>
+                                                <td class="font-success">$${product.price} </td>
                                                 <td style="text-align: center">${product.quantite}</td>
                                             </tr>
                                         </c:forEach>

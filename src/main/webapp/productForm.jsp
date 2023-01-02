@@ -146,38 +146,28 @@
                                                                                       aria-hidden="true"></i></div>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Product</span></a>
+                                    data-feather="shopping-bag"></i><span>Products</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listProducts">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Products</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listProducts">product list</a>
+                                    </li>
                                 </ul>
 
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
                                     data-feather="users"></i><span>Users</span></a>
                                 <ul class="sidebar-submenu">
-
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listUsers">
-                                        <li>
-                                            <button type="submit" class="btn bg-transparent"> list Users</button>
-                                        </li>
-                                    </form>
+                                    <li>
+                                        <a href="AdminController?action=listUsers">user list</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i
-                                    data-feather="shopping-bag"></i><span>Achats</span></a>
+                                    data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
-                                    <form action="AdminController" method="post">
-                                        <input type="hidden" name="action" value="listAchats">
-                                        <button type="submit" class="btn bg-transparent">liste achat</button>
-                                    </form>
-
+                                    <li>
+                                        <a href="AdminController?action=listAchats">order list</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -194,7 +184,7 @@
                         </div>
                         <div class="col-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a>
+                                <li class="breadcrumb-item"><a href="#"> <i data-feather="home"></i></a>
                                 </li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
@@ -228,27 +218,28 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Nom</label>
+                                                    <label class="col-sm-3 col-form-label">Name</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" value="<c:out value='${product.nom}' />"
+                                                        <input type="text" value="<c:out value='${product.name}' />"
                                                                class="form-control" type="text"
-                                                               placeholder="Sasir nom du produit" name="nom">
+                                                               placeholder="***************" name="name">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Description</label>
+                                                    <label class="col-sm-3 col-form-label">Price</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text"
-                                                               value="<c:out value='${product.description}' />"
-                                                               class="form-control" type="text"
-                                                               placeholder="saisir description du produit "
-                                                               name="description">
+                                                        <input type="number"
+                                                               value="<c:out value='${product.price}' />"
+                                                               class="form-control"
+                                                               placeholder="***************" name="price"
+                                                               inputmode="decimal">
                                                     </div>
                                                 </div>
+
                                                 <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Categorie</label>
+                                                    <label class="col-sm-3 col-form-label">Category</label>
                                                     <div class="col-sm-9">
-                                                        <select class="form-control" name="categorie">
+                                                        <select class="form-control" name="category">
                                                             <option value="ordinateur">ordinateur</option>
                                                             <option value="accessoireOrdinateur">accessoireOrdinateur
                                                             </option>
@@ -261,13 +252,12 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-sm-3 col-form-label">Prix</label>
+                                                <div class="mb-3 row mt-4">
+                                                    <label class="col-sm-3 col-form-label">Quantity</label>
                                                     <div class="col-sm-9">
-                                                        <input type="number"
-                                                               value="<c:out value='${product.prix}' />"
-                                                               class="form-control"
-                                                               placeholder="saisir prix du produit" name="prix">
+                                                        <input value="<c:out value='${product.quantity}' />"
+                                                               class="form-control " type="number"
+                                                               placeholder="***************" name="quantity">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
@@ -275,7 +265,7 @@
                                                     <div class="col-sm-9">
                                                         <input class="form-control" type="file"
                                                                value="<c:out value= '${product.image}' />"
-                                                               aria-label="file example" required=""
+                                                               aria-label="file example"
                                                                data-bs-original-title="" title="" name="image">
                                                     </div>
                                                     <c:if test="${product != null}">
@@ -286,14 +276,27 @@
                                                     </c:if>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 row mt-4">
-                                                <label class="col-sm-3 col-form-label">Quantite</label>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">Description</label>
                                                 <div class="col-sm-9">
-                                                    <input value="<c:out value='${product.quantite}' />"
-                                                           class="form-control " type="number"
-                                                           placeholder="saisir quantite du produit" name="quantite">
+                                                    <input type="text"
+                                                           value="<c:out value='${product.description}' />"
+                                                           class="form-control" type="text"
+                                                           placeholder="***************"
+                                                           name="description">
                                                 </div>
                                             </div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">START DATE</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date"
+                                                           value="<c:out value='${product.created_at}' />"
+                                                           class="form-control" type="text"
+                                                           placeholder="***************"
+                                                           name="description">
+                                                </div>
+                                            </div>
+
                                             <div class="card-footer text-end">
                                                 <c:if test="${product == null}">
                                                     <button type="submit" class="btn btn-success">add
@@ -305,13 +308,11 @@
                                                         product
                                                     </button>
                                                 </c:if>
-                                                <form method="post" action="AdminController">
-                                                    <input type="hidden" name="action" value="goproductpage">
-                                                    <button type="submit" class="btn btn-light">Cancel</button>
-                                                </form>
+                                                <a href="AdminController?action=listProducts" class="btn btn-light">Cancel</a>
                                             </div>
                                         </div>
                                     </form>
+
                             </div>
                         </div>
                     </div>

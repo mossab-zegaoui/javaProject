@@ -1,27 +1,25 @@
-package model;
+package models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Entity(name = "Order")
 public class Order {
-    @Id
-    private Long id;
+    private int id;
     private String userName;
     private String productName;
     private double productPrice;
     private int productQantity;
     private double orderTotalPrice;
     private String pingCode;
-    private int orderStatus;
+    private String orderStatus;
     private LocalDateTime orderDate;
 
-    public Order() {}
+    public Order() {
+    }
 
-    public Order(Long id, String userName, String productName, double productPrice, int productQantity, double orderTotalPrice, String pingCode, int orderStatus, LocalDateTime orderDate) {
+    public Order(int id, String userName, String productName, double productPrice, int productQantity, double orderTotalPrice, String pingCode, int orderStatus, LocalDateTime orderDate) {
         this.id = id;
         this.userName = userName;
         this.productName = productName;
@@ -29,16 +27,15 @@ public class Order {
         this.productQantity = productQantity;
         this.orderTotalPrice = orderTotalPrice;
         this.pingCode = pingCode;
-        this.orderStatus = orderStatus;
         this.orderDate = orderDate;
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -90,11 +87,11 @@ public class Order {
         this.pingCode = pingCode;
     }
 
-    public int getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 

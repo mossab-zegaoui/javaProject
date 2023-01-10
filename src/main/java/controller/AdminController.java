@@ -4,9 +4,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import businessLayer.BusinessLayer;
-import model.Order;
-import model.Product;
-import model.User;
+import models.Category;
+import models.Product;
+import models.User;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,13 +19,14 @@ public class AdminController extends HttpServlet {
     BusinessLayer businessLayer;
     ArrayList<Product> products;
     ArrayList<User> userList;
-    ArrayList<Order> orderList;
+    ArrayList<Category> categories;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         businessLayer = new BusinessLayer();
-        userList = businessLayer.listAllUsers();
-        products = businessLayer.listAllProducts();
+        products = new ArrayList<>();
+        userList = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     @Override
@@ -50,17 +51,18 @@ public class AdminController extends HttpServlet {
                 showNewFormProduct(request, response);
                 break;
             case "editProduct":
-                showEditForm(request, response);
+                showEditFormProduct(request, response);
+                break;
+            case "showProducts":
+                showProducts(request, response);
                 break;
 //  Orders
             case "listOrders":
                 listOrders(request, response);
                 break;
-            case "listAchatsUser":
-                listAchatsUser(request, response);
-                break;
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,22 +92,16 @@ public class AdminController extends HttpServlet {
     }
 
     //    Orders
-    private void listAchatsUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String login = request.getParameter("login");
-//        User existingUser = businessLayer.selectUser(id);
-//        products = businessLayer.listeAchatUser(login);
-//        request.setAttribute("productsList", products);
-//        request.setAttribute("user", existingUser);
-        request.getRequestDispatcher("userOrder.jsp").forward(request, response);
-    }
-
     private void listOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Product> processingProducts;
-        ArrayList<Product> shippedProducts;
-        processingProducts = businessLayer.getProcessingOrders();
-        shippedProducts = businessLayer.shippedProducts();
-        request.setAttribute("processingProducts", processingProducts);
-        request.setAttribute("shippedProducts", shippedProducts);
+        ArrayList<Product> processingOrders;
+        ArrayList<Product> shippedOrders;
+        ArrayList<Product> cancelledOrders;
+        processingOrders = businessLayer.getProcessingOrders();
+        shippedOrders = businessLayer.shippedOrders();
+        cancelledOrders = businessLayer.cancelledOrders();
+        request.setAttribute("processingOrders", processingOrders);
+        request.setAttribute("shippedOrders", shippedOrders);
+        request.setAttribute("cancelledOrders", cancelledOrders);
         request.getRequestDispatcher("orderList.jsp").forward(request, response);
 
     }
@@ -119,6 +115,8 @@ public class AdminController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User existingUser = businessLayer.selectUser(id);
         request.setAttribute("user", existingUser);
+        ArrayList<Product> userOrders = businessLayer.getUserOrders(id);
+        request.setAttribute("userOrders", userOrders);
         request.getRequestDispatcher("userForm.jsp").forward(request, response);
     }
 
@@ -136,10 +134,8 @@ public class AdminController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         User user = new User(login, pasword, email, firstName, lastName);
         businessLayer.saveUser(user);
-        userList = businessLayer.listAllUsers();
-        request.setAttribute("usersList", userList);
         request.setAttribute("successMessage", "user has been added");
-        request.getRequestDispatcher("userList.jsp").forward(request, response);
+        listUsers(request, response);
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -151,31 +147,36 @@ public class AdminController extends HttpServlet {
         String lastName = request.getParameter("lastName");
         User user = new User(id, login, password, email, firstName, lastName);
         businessLayer.editUser(user);
-        userList = businessLayer.listAllUsers();
-        request.setAttribute("usersList", userList);
         request.setAttribute("successMessage", "user has been updated");
-        request.getRequestDispatcher("userList.jsp").forward(request, response);
+        listUsers(request, response);
     }
 
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         businessLayer.deleteUser(login);
-        userList = businessLayer.listAllUsers();
-        request.setAttribute("userList", userList);
         request.setAttribute("deleteMessage", "user has been deleted");
-        request.getRequestDispatcher("userList.jsp").forward(request, response);
+        listUsers(request, response);
     }
 
-//    Products
+    //    Products
+    private void showProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        products = businessLayer.listAllProducts();
+        request.setAttribute("products", products);
+        listCategories(request, response);
+        request.getRequestDispatcher("product.jsp").forward(request, response);
+    }
+
     private void showNewFormProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        listCategories(request, response);
         request.getRequestDispatcher("productForm.jsp").forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showEditFormProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Product existingProduct = businessLayer.selectProduct(id);
         request.setAttribute("product", existingProduct);
+        listCategories(request, response);
         request.getRequestDispatcher("productForm.jsp").forward(request, response);
     }
 
@@ -190,7 +191,7 @@ public class AdminController extends HttpServlet {
     private void insertProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Part file = request.getPart("image");
         String imageName = file.getSubmittedFileName();
-        String uploadPath = "D:/JavaProjects/eCommerceApp/src/main/webapp/img/" + imageName;
+        String uploadPath = "D:/JavaProjects/eCommerceApp/src/main/webapp/images/" + imageName;
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
             InputStream inputStream = file.getInputStream();
@@ -208,16 +209,15 @@ public class AdminController extends HttpServlet {
         String description = request.getParameter("description");
         Product product = new Product(name, price, category, quantity, description, imageName);
         businessLayer.saveProduct(product);
-        products = businessLayer.listAllProducts();
         request.setAttribute("products", products);
         request.setAttribute("successMessage", "product inserted successfully");
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+        listProducts(request, response);
     }
 
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Part file = request.getPart("image");
         String imageName = file.getSubmittedFileName();
-        String uploadPath = "D:/JavaProjects/eCommerceApp/src/main/webapp/img/" + imageName;
+        String uploadPath = "D:/JavaProjects/eCommerceApp/src/main/webapp/images/" + imageName;
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
             InputStream inputStream = file.getInputStream();
@@ -236,17 +236,20 @@ public class AdminController extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         Product product = new Product(id, name, price, category, quantity, description, imageName);
         businessLayer.editProduct(product);
-        products = businessLayer.listAllProducts();
-        request.setAttribute("products", products);
         request.setAttribute("successMessage", "Product update successfully ");
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+        listProducts(request, response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         businessLayer.deleteProduct(id);
-        products = businessLayer.listAllProducts();
         request.setAttribute("dangerMessage", "Product deleted");
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+        listProducts(request, response);
+    }
+
+    //    Categories
+    private void listCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        categories = businessLayer.listAllCategories();
+        request.setAttribute("categories", categories);
     }
 }

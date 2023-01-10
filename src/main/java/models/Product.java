@@ -1,6 +1,5 @@
-package model;
+package models;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 public class Product {
@@ -12,35 +11,7 @@ public class Product {
     private String description;
     private String image;
     private Date created_at;
-
-    public Product(int id, String name, double price, String category, int quantity, String description, String image, Date created_at) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.quantity = quantity;
-        this.description = description;
-        this.image = image;
-        this.created_at = created_at;
-    }
-
-    public Product(int id, String name, double price, int quantity, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.image = image;
-    }
-
-    public Product(String name, double price, String category, int quantity, String description, String image, Date created_at) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.quantity = quantity;
-        this.description = description;
-        this.image = image;
-        this.created_at = created_at;
-    }
+    private String status;
 
     public Product(String name, double price, String category, int quantity, String description, String image) {
         this.name = name;
@@ -61,6 +32,13 @@ public class Product {
         this.image = image;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Product() {
 

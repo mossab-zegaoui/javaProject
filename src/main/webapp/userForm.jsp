@@ -43,9 +43,6 @@
 </head>
 
 <body>
-<!-- tap on top starts-->
-<div class="tap-top"><i data-feather="chevrons-up"></i></div>
-<!-- tap on tap ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper compact-wrapper" id="pageWrapper">
     <!-- Page Header Start-->
@@ -67,8 +64,8 @@
                 </div>
             </form>
             <div class="header-logo-wrapper col-auto p-0">
-                <div class="logo-wrapper"><a href="adminIndex.jsp"><img class="img-fluid"
-                                                                        src="assets/images/logo/logo.png" alt=""></a>
+                <div class="logo-wrapper"><a href="admin_index.jsp"><img class="img-fluid"
+                                                                         src="assets/images/logo/logo.png" alt=""></a>
                 </div>
                 <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle"
                                                data-feather="align-center"></i>
@@ -130,7 +127,7 @@
 
                     </div>
                 </div>
-                <div class="logo-icon-wrapper"><a href="adminIndex.jsp">
+                <div class="logo-icon-wrapper"><a href="admin_index.jsp">
                     <img class="img-fluid"
                          src="assets/images/logo/logo-icon.png"
                          alt=""></a></div>
@@ -138,9 +135,9 @@
                     <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                     <div id="sidebar-menu">
                         <ul class="sidebar-links" id="simple-bar">
-                            <li class="back-btn"><a href="adminIndex.jsp"><img class="img-fluid"
-                                                                               src="assets/images/logo/logo-icon.png"
-                                                                               alt=""></a>
+                            <li class="back-btn"><a href="admin_index.jsp"><img class="img-fluid"
+                                                                                src="assets/images/logo/logo-icon.png"
+                                                                                alt=""></a>
                                 <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                                                                       aria-hidden="true"></i></div>
                             </li>
@@ -165,7 +162,7 @@
                                     data-feather="shopping-bag"></i><span>Orders</span></a>
                                 <ul class="sidebar-submenu">
                                     <li>
-                                        <a href="AdminController?action=listAchats">order list</a>
+                                        <a href="AdminController?action=listOrders">order list</a>
                                     </li>
                                 </ul>
                             </li>
@@ -264,6 +261,7 @@
                                                            name="lastName">
                                                 </div>
                                             </div>
+
                                             <div class="card-footer text-end">
                                                 <c:if test="${user == null}">
                                                     <button type="submit" class="btn btn-success">add
@@ -282,6 +280,52 @@
                             </div>
                         </div>
                     </div>
+                    <c:if test="${user != null}">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">Orders</h4>
+                                    <div class="card-options"><a class="card-options-collapse" href="#"
+                                                                 data-bs-toggle="card-collapse"><i
+                                            class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#"
+                                                                                data-bs-toggle="card-remove"><i
+                                            class="fe fe-x"></i></a></div>
+                                </div>
+                                <div class="table-responsive add-project">
+                                    <table class="table card-table table-vcenter text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Order items</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${userOrders}" var="order">
+                                            <tr>
+                                                <td><a class="text-inherit" href="#">${order.name}</a></td>
+                                                <td>${order.created_at}</td>
+                                                <td><span class="status-icon bg-success"></span>${order.status}</td>
+                                                <td>${order.price}</td>
+                                                <td class="text-end"><a class="icon" href="javascript:void(0)"></a><a
+                                                        class="btn btn-primary btn-sm" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil"></i> Edit</a><a class="icon"
+                                                                                             href="javascript:void(0)"></a><a
+                                                        class="btn btn-transparent btn-sm" href="javascript:void(0)"><i
+                                                        class="fa fa-link"></i> Update</a><a class="icon"
+                                                                                             href="javascript:void(0)"></a><a
+                                                        class="btn btn-danger btn-sm" href="javascript:void(0)"><i
+                                                        class="fa fa-trash"></i> Delete</a></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>

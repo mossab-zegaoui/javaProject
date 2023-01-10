@@ -1,10 +1,6 @@
-package model;
+package models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
-import java.time.LocalDate;
+import java.util.Date;
 
 public class User {
     private int id;
@@ -13,6 +9,12 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+
+    public Date created_at;
+    private String address;
+    private String phone;
+    private String postalCode;
+    private String country;
 
     public User(String login) {
         this.login = login;
@@ -49,6 +51,46 @@ public class User {
 
     public User() {
 
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
     public int getId() {

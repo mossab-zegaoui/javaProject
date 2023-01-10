@@ -1,13 +1,12 @@
 package businessLayer;
 
-import model.User;
+import models.User;
 
 import java.util.ArrayList;
 
 public interface gestionUsersInterface {
 
 	public ArrayList<User> listAllUsers();
-
 
 	public User selectUser(int id);
 
@@ -17,4 +16,5 @@ public interface gestionUsersInterface {
 
 	public void editUser(User user);
 
+    void addUserDetails(User user);
 }
